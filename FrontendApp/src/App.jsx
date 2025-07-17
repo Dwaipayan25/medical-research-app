@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
@@ -8,9 +8,21 @@ import CarvIdPage from './components/CarvIdPage'
 import AIAgentPage from './components/AIAgentPage'
 import './App.css'
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ethers } from 'ethers';
 import { marked } from 'marked';
+
+/*
+ * ENVIRONMENT VARIABLES SETUP:
+ * Create a .env file in the root of your project with the following variables:
+ * 
+ * VITE_GEMINI_API_KEY=your_gemini_api_key_here
+ * VITE_CARV_ID_NFT_ADDRESS=0xYourCarvIdContractAddress
+ * VITE_MEDICAL_RESEARCH_RESULTS_ADDRESS=0xYourMedicalResearchContractAddress
+ * 
+ * Get your Gemini API key from: https://aistudio.google.com/app/apikey
+ * Replace contract addresses with your deployed contract addresses
+ */
 
 // --- Smart Contract ABIs and Addresses (PLACEHOLDERS - REPLACE WITH YOUR DEPLOYED VALUES) ---
 // You will get these after deploying your Solidity contracts using Hardhat/Foundry
@@ -25,14 +37,14 @@ const CARV_ID_NFT_ABI = [
   "event AccessGranted(uint256 indexed tokenId, address indexed agentAddress, bytes32 indexed dataTypeHash)",
   "event AccessRevoked(uint256 indexed tokenId, address indexed agentAddress, bytes32 indexed dataTypeHash)"
 ];
-const CARV_ID_NFT_ADDRESS = "0xE2E6A824816A5f184ba3124c736A43c6734bB122"; // e.g., "0x..."
+const CARV_ID_NFT_ADDRESS = import.meta.env.VITE_CARV_ID_NFT_ADDRESS || "0xE2E6A824816A5f184ba3124c736A43c6734bB122"; // Fallback address
 
 const MEDICAL_RESEARCH_RESULTS_ABI = [
   "function submitAggregatedResult(string researchTopic, bytes32 resultHash, uint256 accuracy, address agentAddress) public",
   "function getResearchResult(string researchTopic, address agentAddress) view returns (bytes32 resultHash, uint256 accuracy)",
   "event ResearchResultSubmitted(string indexed researchTopic, bytes32 indexed resultHash, uint256 accuracy, address indexed agentAddress)"
 ];
-const MEDICAL_RESEARCH_RESULTS_ADDRESS = "0x9769f12E69A2eeaEd5b5FFc3ba23e5F6B6FA3360"; // e.g., "0x..."
+const MEDICAL_RESEARCH_RESULTS_ADDRESS = import.meta.env.VITE_MEDICAL_RESEARCH_RESULTS_ADDRESS || "0x9769f12E69A2eeaEd5b5FFc3ba23e5F6B6FA3360"; // Fallback address
 
 // --- AI Agent (Off-chain Python) - Conceptual Interaction ---
 // In a real scenario, this would be a Python backend service. For this demo,
@@ -314,7 +326,7 @@ function App() {
     let chatHistory = [];
     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
     const payload = { contents: chatHistory };
-    const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; // Get API key from environment variables
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     try {
@@ -358,7 +370,7 @@ function App() {
     let chatHistory = [];
     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
     const payload = { contents: chatHistory };
-    const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; // Get API key from environment variables
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     try {
@@ -406,7 +418,7 @@ function App() {
     let chatHistory = [];
     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
     const payload = { contents: chatHistory };
-    const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; // Get API key from environment variables
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     try {
@@ -436,27 +448,6 @@ function App() {
       setExplainTermLoading(false);
     }
   };
-
-  // Simple placeholder components
-  // const CarvIdPage = () => (
-  //   <div className="max-w-4xl mx-auto p-8">
-  //     <h2 className="text-3xl font-bold text-center mb-8 text-purple-400">CARV ID Management</h2>
-  //     <div className="bg-gray-800 rounded-xl p-6 text-center">
-  //       <p className="text-gray-300">CARV ID functionality coming soon...</p>
-  //       <p className="text-gray-400 text-sm mt-2">This page will allow you to mint and manage your CARV ID NFTs.</p>
-  //     </div>
-  //   </div>
-  // );
-
-  // const AIAgentPage = () => (
-  //   <div className="max-w-4xl mx-auto p-8">
-  //     <h2 className="text-3xl font-bold text-center mb-8 text-purple-400">AI Research Agents</h2>
-  //     <div className="bg-gray-800 rounded-xl p-6 text-center">
-  //       <p className="text-gray-300">AI Agent research functionality coming soon...</p>
-  //       <p className="text-gray-400 text-sm mt-2">This page will allow you to interact with AI research agents.</p>
-  //     </div>
-  //   </div>
-  // );
 
   const renderPage = () => {
     switch (currentPage) {
