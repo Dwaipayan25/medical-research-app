@@ -18,7 +18,7 @@ contract CarvIdNFT is ERC721, ERC721URIStorage, Ownable {
     event AccessGranted(uint256 indexed tokenId, address indexed agentAddress, bytes32 indexed dataTypeHash);
     event AccessRevoked(uint256 indexed tokenId, address indexed agentAddress, bytes32 indexed dataTypeHash);
 
-    constructor(string memory name, string memory symbol) ERC721(name, symbol) Ownable(msg.sender) {}
+    constructor(string memory name, string memory symbol) ERC721(name, symbol) Ownable() {}
 
     // Function to mint a new CARV ID NFT to a patient (user)
     // In a real system, this might have more complex logic (e.g., linked to Web2 identity)
@@ -33,18 +33,16 @@ contract CarvIdNFT is ERC721, ERC721URIStorage, Ownable {
     // Allows the owner of a CARV ID NFT to grant an AI agent access to a specific data type
     // dataTypeHash is a keccak256 hash of the data type string (e.g., keccak256("drug_discovery_data"))
     function grantAccess(uint256 tokenId, address agentAddress, bytes32 dataTypeHash) public {
-        require(_isAuthorized(ownerOf(tokenId), msg.sender, tokenId), "CarvIdNFT: Caller is not owner nor approved");
+        require(_isApprovedOrOwner(msg.sender, tokenId), "CarvIdNFT: Caller is not owner nor approved");
         require(agentAddress != address(0), "CarvIdNFT: Agent address cannot be zero");
-
         dataAccessPermissions[tokenId][agentAddress][dataTypeHash] = true;
         emit AccessGranted(tokenId, agentAddress, dataTypeHash);
     }
 
     // Allows the owner of a CARV ID NFT to revoke an AI agent's access to a specific data type
     function revokeAccess(uint256 tokenId, address agentAddress, bytes32 dataTypeHash) public {
-        require(_isAuthorized(ownerOf(tokenId), msg.sender, tokenId), "CarvIdNFT: Caller is not owner nor approved");
+        require(_isApprovedOrOwner(msg.sender, tokenId), "CarvIdNFT: Caller is not owner nor approved");
         require(agentAddress != address(0), "CarvIdNFT: Agent address cannot be zero");
-
         dataAccessPermissions[tokenId][agentAddress][dataTypeHash] = false;
         emit AccessRevoked(tokenId, agentAddress, dataTypeHash);
     }
@@ -61,5 +59,9 @@ contract CarvIdNFT is ERC721, ERC721URIStorage, Ownable {
 
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721URIStorage) returns (bool) {
         return super.supportsInterface(interfaceId);
+    }
+
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
     }
 }
