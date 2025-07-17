@@ -5,6 +5,7 @@ function HomePage({ onLaunchApp }) {
     <div className="min-h-screen bg-gray-900 text-gray-100 font-inter">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
         <div className="max-w-7xl mx-auto space-y-12 lg:space-y-16 text-center">
+          
           {/* Hero Section */}
           <div className="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8 lg:p-12 space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-purple-400 leading-tight">
@@ -33,6 +34,7 @@ function HomePage({ onLaunchApp }) {
           <div className="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8 lg:p-12 space-y-8">
             <h2 className="text-2xl sm:text-3xl font-semibold text-purple-300">Key Technologies & Their Role</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+              
               {/* CARV SVM Chain */}
               <div className="bg-gray-700 p-4 sm:p-6 rounded-xl shadow-lg space-y-4 border border-purple-600 hover:border-purple-400 transition-colors duration-300">
                 <h3 className="text-lg sm:text-xl font-bold text-purple-200">CARV SVM Chain</h3>
@@ -104,8 +106,10 @@ function HomePage({ onLaunchApp }) {
                   **Use Case:** Building the interactive and responsive frontend Decentralized Application (DApp) for patients to manage their data access, trigger research simulations, and view AI-powered insights.
                 </p>
               </div>
+              
             </div>
           </div>
+          
         </div>
       </div>
     </div>
