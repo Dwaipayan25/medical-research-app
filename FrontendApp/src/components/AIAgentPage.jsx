@@ -221,7 +221,7 @@ function AIAgentPage({
                 placeholder="Enter medical term (e.g., 'Hypertension')"
                 value={medicalTerm}
                 onChange={(e) => setMedicalTerm(e.target.value)}
-                className="flex-1 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="flex-1 p-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
               <button
                 onClick={explainMedicalTerm}
@@ -242,7 +242,7 @@ function AIAgentPage({
             {isLoading ? (
               <div className="text-center">
                 <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mb-4"></div>
-                <p className="text-gray-600">Generating with Gemini...</p>
+                <p className="text-gray-600">Generating...</p>
               </div>
             ) : (
               <div className="text-gray-700 leading-relaxed max-h-80 overflow-y-auto">
