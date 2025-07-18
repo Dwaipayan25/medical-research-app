@@ -40,7 +40,7 @@ function CarvIdPage({
                 placeholder="Enter desired CARV ID (e.g., 123)"
                 value={mintingId}
                 onChange={(e) => setMintingId(e.target.value)}
-                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
+                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
               <button
                 onClick={mintCarvId}
@@ -63,21 +63,21 @@ function CarvIdPage({
                 placeholder="Your CARV ID Token ID"
                 value={grantingId}
                 onChange={(e) => setGrantingId(e.target.value)}
-                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
+                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
               <input
                 type="text"
                 placeholder="AI Agent Wallet Address (e.g., 0x...)"
                 value={grantAgentAddress}
                 onChange={(e) => setGrantAgentAddress(e.target.value)}
-                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
+                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
             <div className="mt-4">
               <select
                 value={grantDataType}
                 onChange={(e) => setGrantDataType(e.target.value)}
-                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
+                className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               >
                 <option value="">Select Data Type</option>
                 <option value="drug_discovery_data">Drug Discovery Data</option>

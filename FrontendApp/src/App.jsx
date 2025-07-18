@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 import HomePage from './components/HomePage'
+import HowItWorks from './components/HowItWorks'
 import Navbar from './components/Navbar'
 import CarvIdPage from './components/CarvIdPage'
 import AIAgentPage from './components/AIAgentPage'
@@ -52,7 +53,7 @@ const MEDICAL_RESEARCH_RESULTS_ADDRESS = import.meta.env.VITE_MEDICAL_RESEARCH_R
 // You would run your Python orchestrator.py script separately.
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'carvId', 'aiAgent'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'howItWorks', 'carvId', 'aiAgent'
 
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
@@ -452,7 +453,9 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onLaunchApp={() => setCurrentPage('carvId')} />;
+        return <HomePage />;
+      case 'howItWorks':
+        return <HowItWorks />;
       case 'carvId':
         return (
           <CarvIdPage
@@ -496,12 +499,12 @@ function App() {
           />
         );
       default:
-        return <HomePage onLaunchApp={() => setCurrentPage('carvId')} />;
+        return <HomePage />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 font-inter">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation Bar */}
       <Navbar 
         userAddress={userAddress}
@@ -511,18 +514,18 @@ function App() {
         setCurrentPage={setCurrentPage}
       />
 
-      {/* Main Content with top padding to account for fixed navbar */}
-      <div className="pt-20">
+      {/* Main Content */}
+      <div>
 
       {/* Global Messages */}
-      <div className="max-w-4xl mx-auto p-4 mt-4">
+      <div className="max-w-4xl mx-auto p-4">
         {error && (
-          <div className="bg-red-700 p-4 rounded-lg text-white text-center font-medium mb-4">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center font-medium mb-4">
             {error}
           </div>
         )}
         {message && (
-          <div className="bg-green-700 p-4 rounded-lg text-white text-center font-medium mb-4">
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg text-center font-medium mb-4">
             {message}
           </div>
         )}
