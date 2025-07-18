@@ -515,7 +515,7 @@ function App() {
       />
 
       {/* Main Content */}
-      <div>
+      <div className="pt-20">
 
       {/* Global Messages */}
       <div className="max-w-4xl mx-auto p-4">
