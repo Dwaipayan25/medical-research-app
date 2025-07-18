@@ -1,4 +1,4 @@
-# 🏥 Decentralized AI Medical Research Network
+# 🏥 MediChainAI - Decentralized AI Medical Research Network
 
 ## Empowering Privacy-Preserving & Collaborative DeSci with AI Agents
 
