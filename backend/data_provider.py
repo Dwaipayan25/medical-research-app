@@ -6,7 +6,9 @@ import requests # For D.A.T.A. API if key is available
 
 # --- Configuration ---
 # Replace with your actual D.A.T.A. Framework API key if obtained
-CARV_DATA_API_KEY = os.getenv("CARV_DATA_API_KEY", "")
+# CARV_DATA_API_KEY = os.getenv("CARV_DATA_API_KEY", "")
+CARV_DATA_API_KEY = "a3f5fd5a-afb9-4ecd-b1fc-d2903ae517f8";
+print("here is the API key:",CARV_DATA_API_KEY)
 CARV_DATA_API_BASE_URL = "https://interface.carv.io/ai-agent-backend/" # From CARV docs
 
 # --- Simulate Anonymized Medical Data ---
